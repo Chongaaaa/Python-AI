@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+header {
+    background-color: #9DABB4;
+    padding: 2% 5% 1%;
+    height: 100px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+}
+
+header a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+header h1 {
+    font-family: 'Limelight';
+    font-size: 70px;
+    width: 280px;
+    display: flex;
+    float: left;
+    height: 90px;
+    margin-top: 10px;
+}
+
+header #functionableHeader {
+    display: flex;
+    flex: right;
+    width: 1100px;
+}
+
+header #searchBar {
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    flex: left;
+}
+
+header #searchBar input {
+    width: 850px;
+    height: 50px;
+    margin: 2% 0%;
+    padding: 5px 15px;
+    border-radius: 10px 0px 0px 10px;
+    font-size: 20px;
+    border: none;
+    transition: all linear 0.3s;
+}
+
+header #searchBar input:focus {
+    outline: none;
+    background-color: #F2F2EB;
+}
+
+header #searchBar button {
+    width: 50px;
+    height: 60px;
+    margin: 2% 0%;
+    background-color: #fff;
+    border: none;
+    border-left: 5px #9DABB4 solid;
+    border-radius: 0px 10px 10px 0px;
+    transition: all linear 0.5s;
+}
+
+header #searchBar img {
+    width: 100%;
+}
+
+header #searchBar button:hover {
+    background-color: #F2F2EB;
+    border-radius: 0px 10px 10px 0px;
+    width: 60px;
+}
+
+header #profileHeader img {
+    width: 110px;
+    display: flex;
+    flex: right;
+    transition: all ease-in-out 0.5s;
+}
+
+header #profileHeader img:hover{
+    width: 108px;
+}
+
+body {
+    background-color: #fff;
+}
+
+/* footer CSS*/
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    background-color: #9DABB4;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+footer ul li {
+    position: relative;
+    float: left;
+    list-style: none;
+}
+
+footer ul li img {
+    display: block;
+    height: 45px;
+    width: 45px;
+    padding: 5px 10px;
+    margin: 0 5px 10px 5px;
+    filter: invert(100%) brightness(100%) contrast(100%);
+}
+
+footer ul li img:hover {
+    transition: 0.1s;
+    filter: invert(92%) sepia(7%) saturate(512%) hue-rotate(5deg) brightness(98%) contrast(96%);
+
+}
+
+footer p {
+    color: #FFFFFF;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
