@@ -7,6 +7,7 @@
     left: 0;
 }
 
+/* header css */
 header {
     background-color: #9DABB4;
     padding: 2% 5% 1%;
@@ -79,6 +80,11 @@ header #searchBar button:hover {
     width: 60px;
 }
 
+header #profileHeader button{
+    border: none;
+    background: none;
+}
+
 header #profileHeader img {
     width: 110px;
     display: flex;
@@ -88,6 +94,32 @@ header #profileHeader img {
 
 header #profileHeader img:hover{
     width: 108px;
+}
+
+#headerDropDownBox {
+    position: absolute;
+    background-color: #D2DCE6;
+    height: 100px;
+    width: 200px;
+    z-index: 1;
+    margin: 140px 0px 0px 1200px;
+}
+
+#headerDropDownBox a {
+    color: #9DABB4;
+    font-family: helvetica;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+#headerDropDownBox hr{
+    border-top: 2px solid #9DABB4;
+    margin-top: 5px;
+}
+
+.show {
+    display: block;
 }
 
 body {

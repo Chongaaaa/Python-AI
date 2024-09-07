@@ -19,14 +19,38 @@
                 <input type="text" id="movieInput" name="movieInput" placeholder="Enter movie name or movie description here.">
                 <button><img src="/image/searchImg.png" alt="Search Icon"></button>
             </div>
+            
             <div id="profileHeader">
-                <a href="profile.html"><img src="/image/profile_pop.png" alt="profile icon"></a>
+                <button id="profileImg" class="dropHeader"><img src="/image/profile_pop.png" alt="profile icon"></button>
+                <div id="headerDropDownBox" class="dropHeaderContent">
+                    <hr>
+                    <a href="profile.html">Profile</a>
+                    <hr>
+                    <a href="signIn.html">Log Out</a>
+                    <hr>
+                </div>
             </div>
         </div>
     </header>
 
     <main>
         <h1>HI</h1>
+
+        <!-- javascript -->
+        <script>
+            // open dropdown if user click on the profile image
+            document.getElementById("profileImg").addEventListener("click", function(e) {
+                document.getElementById("headerDropDownBox").classList.toggle("show");
+            });
+
+            // Close the dropdown if the user clicks outside of it
+            window.addEventListener("click", function(event) {
+                if (!event.target.matches('.dropHeader')) {
+                    document.querySelectorAll(".dropHeaderContent.show")
+                    .forEach(openDropdown => openDropdown.classList.remove('show'))
+                }
+            });
+        </script>
     </main>
 
     <footer>
