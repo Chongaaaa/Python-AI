@@ -21,13 +21,11 @@
             </div>
             
             <div id="profileHeader">
-                <button id="profileImg" class="dropHeader"><img src="/image/profile_pop.png" alt="profile icon"></button>
+                <img id="profileImg" src="/image/profile_pop.png" alt="profile icon">
                 <div id="headerDropDownBox" class="dropHeaderContent">
-                    <hr>
-                    <a href="profile.html">Profile</a>
+                    <a href="profile.html" style="margin-top: 15px;">Profile</a>
                     <hr>
                     <a href="signIn.html">Log Out</a>
-                    <hr>
                 </div>
             </div>
         </div>
@@ -38,17 +36,9 @@
 
         <!-- javascript -->
         <script>
-            // open dropdown if user click on the profile image
-            document.getElementById("profileImg").addEventListener("click", function(e) {
-                document.getElementById("headerDropDownBox").classList.toggle("show");
-            });
-
-            // Close the dropdown if the user clicks outside of it
-            window.addEventListener("click", function(event) {
-                if (!event.target.matches('.dropHeader')) {
-                    document.querySelectorAll(".dropHeaderContent.show")
-                    .forEach(openDropdown => openDropdown.classList.remove('show'))
-                }
+            // Open dropdown if the user clicks on the profile image
+            document.getElementById("profileImg").addEventListener('click', function(e) {
+                document.getElementById("headerDropDownBox").style.display = "block";
             });
         </script>
     </main>

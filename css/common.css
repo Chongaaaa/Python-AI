@@ -63,7 +63,7 @@ header #searchBar button {
     width: 50px;
     height: 60px;
     margin: 2% 0%;
-    background-color: #fff;
+    background-color: #ffffff;
     border: none;
     border-left: 5px #9DABB4 solid;
     border-radius: 0px 10px 10px 0px;
@@ -97,28 +97,36 @@ header #profileHeader img:hover{
 }
 
 #headerDropDownBox {
+    display: none;
     position: absolute;
-    background-color: #D2DCE6;
+    background-color: #FFFFFF;
     height: 100px;
     width: 200px;
     z-index: 1;
-    margin: 140px 0px 0px 1200px;
+    margin: 120px 0px 0px 1210px;
+    border-radius: 20px;
 }
 
 #headerDropDownBox a {
     color: #9DABB4;
+    font-weight: bold;
+    font-size: 18px;
     font-family: helvetica;
-    padding: 5px 5px;
+    padding: 5px 15px;
     text-decoration: none;
     display: block;
 }
 
-#headerDropDownBox hr{
-    border-top: 2px solid #9DABB4;
-    margin-top: 5px;
+#headerDropDownBox a:hover{
+    color: #000000;
 }
 
-.show {
+#headerDropDownBox hr{
+    border-top: 2px solid #9DABB4;
+    margin: 5px 0px;
+}
+
+#headerDropDownBox .show {
     display: block;
 }
 
