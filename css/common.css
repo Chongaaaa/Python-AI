@@ -105,6 +105,7 @@ header #profileHeader img:hover{
     z-index: 1;
     margin: 120px 0px 0px 1210px;
     border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 }
 
 #headerDropDownBox a {
@@ -124,10 +125,6 @@ header #profileHeader img:hover{
 #headerDropDownBox hr{
     border-top: 2px solid #9DABB4;
     margin: 5px 0px;
-}
-
-#headerDropDownBox .show {
-    display: block;
 }
 
 body {

@@ -1,38 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- font family -->
     <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet'>
-    
-    <!-- CSS -->
+
     <link rel="stylesheet" href="/css/common.css">
-    <title>Mobie-Search</title>
+    <title>Mobie - Search</title>
 </head>
+
 <body>
     <header>
         <h1><a href="index.html">Mobie</a></h1>
         <div id="functionableHeader">
             <div id="searchBar">
-                <input type="text" id="movieInput" name="movieInput" placeholder="Enter movie name or movie description here.">
+                <input type="text" id="movieInput" name="movieInput"
+                    placeholder="Enter movie name or movie description here.">
                 <button><img src="/image/searchImg.png" alt="Search Icon"></button>
+            </div>
+
+            <div id="profileHeader">
+                <img id="profileImg" src="/image/profile_pop.png" alt="profile icon">
+                <div id="headerDropDownBox" class="dropHeaderContent">
+                    <a href="profile.html" style="margin-top: 15px;">Profile</a>
+                    <hr>
+                    <a href="signIn.html">Log Out</a>
+                </div>
             </div>
         </div>
     </header>
 
     <main>
         <h1>HI</h1>
+
+        <script>
+            // Open dropdown if the user hovers over the profile image
+            document.getElementById("profileImg").addEventListener('mouseover', function () {
+                document.getElementById("headerDropDownBox").style.display = "block";
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!event.target.closest('#profileHeader')) {
+                    document.getElementById("headerDropDownBox").style.display = "none";
+                }
+            });
+        </script>
     </main>
 
     <footer>
         <ul>
             <li><a href="https://www.twitter.com/" target="_blank"><img src="/image/twitter.png" alt="Twitter"></a></li>
-            <li><a href="https://www.facebook.com/" target="_blank"><img src="/image/facebook.png" alt="Facebook"></a></li>
-            <li><a href="https://www.instagram.com/" target="_blank"><img src="/image/instagram.png" alt="Instalgram"></a></li>
+            <li><a href="https://www.facebook.com/" target="_blank"><img src="/image/facebook.png" alt="Facebook"></a>
+            </li>
+            <li><a href="https://www.instagram.com/" target="_blank"><img src="/image/instagram.png"
+                        alt="Instalgram"></a></li>
         </ul>
         <p>© 2024 Mobie All rights reserved.</p>
     </footer>
 </body>
+
 </html>
