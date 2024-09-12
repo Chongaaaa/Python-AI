@@ -8,6 +8,8 @@
     <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet'>
 
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/megumi.jpg">
     <title>Mobie - Profile</title>
 </head>
 
@@ -33,8 +35,47 @@
     </header>
 
     <main>
-        <h1>HI</h1>
+        <div class="profilecon">
+            <h1>My Profile</h1>
+            
+            <section id="details">
+                <!-- <img id="birthday" src="birthday.png" alt="birthday">
+                <img id="envelope" src="envelope.png" alt="envelope"> -->
+                <div class="profile">
+                    <div id="profile-img">
+                        <img src="/css/megumi.jpg" alt="laogong" class="megumi">
+                    </div>
+                    <div id="profile-text">
 
+                        <!-- <p><img src="" alt="userID" style="height: 5%; width: 5.4%; margin-top: 2px;"> User ID : M00001</p> -->
+
+                        <p> User ID : M00001</p>
+
+                        <!-- <p><img id="user" src="user.png" alt="user" style="height: 10%; width: 5.5%;"> Name : Megumi Fushiguro</p> -->
+
+                        <p> Name : Megumi Fushiguro</p>
+
+                        <p> Age : 22</p>
+                        
+                        <p> Gender : Male</p>
+
+                        <p> Email : megumifushiguro@gmail.com</p>
+
+                        <p> Nationality : Malaysia</p>
+                    
+                    </div>
+                </div>
+            </section>
+    
+            <div id="btn">
+                <a href="watchHistory.csv">
+                    <button class="history">View Watch History</button>
+                </a>
+
+                <a href="signIn.html">
+                    <button>Log Out</button>
+                </a>
+            </div>
         <script>
             // Open dropdown if the user hovers over the profile image
             document.getElementById("profileImg").addEventListener('mouseover', function () {
