@@ -45,7 +45,7 @@
     text-align: left;
   }  
   
-  h1 {
+  h1#profiletitle {
     font-family: Roboto;
     text-align: center;
     margin:auto;
@@ -58,7 +58,7 @@
     padding-bottom: 1%;
   }
   
-  button {
+  button.history, button.logout {
       font-family: Roboto;
       background-color: #7f8089;
       color: white;
@@ -76,7 +76,7 @@
       margin-right: 2vw;
     }
   
-  button a{
+  button.history, button.logout a{
     font-family: Roboto;
     color: white;
     text-decoration: none;
