@@ -7,9 +7,9 @@ body, html {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Move content towards the top */
+    justify-content: flex-start; 
     align-items: center;
-    margin-bottom: 20px; /* Add some space at the bottom */
+    margin-bottom: 20px; 
 }
 
 .logo {
@@ -17,14 +17,14 @@ body, html {
     font-size: 72px;
     color: #ffffff;
     letter-spacing: 2px;
-    margin-bottom: 10px; /* Reduced space below the logo */
+    margin-bottom: 10px; 
 }
 
 .signup-title {
     font-size: 40px;
     color: #000000;
     margin-top: 0px;
-    margin-bottom: 30px; /* Reduced space below the signup title */
+    margin-bottom: 30px; 
     text-align: center;
 }
 
@@ -35,7 +35,7 @@ body, html {
     width: 1000px;
     text-align: center;
     border: 3px solid #000000;
-    margin-bottom: 20px; /* Add a little space below the signup box */
+    margin-bottom: 20px; 
 }
 
 .signup-box h2 {
