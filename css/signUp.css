@@ -3,76 +3,90 @@ body, html {
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: #ffffff; 
+    background-color: #d0d8e4; 
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start; 
     align-items: center;
-}
-
-
-.outer-container {
-    background-color: #d0d8e4; 
-    padding: 40px 20px; 
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); 
-    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 .logo {
-    font-family: 'Georgia', serif;
-    font-size: 36px;
+    font-family: 'Limelight';
+    font-size: 72px;
     color: #ffffff;
     letter-spacing: 2px;
-    margin-bottom: 20px; 
+    margin-bottom: 10px; 
+}
+
+.signup-title {
+    font-size: 40px;
+    color: #000000;
+    margin-top: 0px;
+    margin-bottom: 30px; 
+    text-align: center;
 }
 
 .signup-box {
     background-color: #c3ccd9; 
-    padding: 20px;
-    border-radius: 10px;
-    width: 320px;
+    padding: 40px;
+    border-radius: 20px;
+    width: 1000px;
     text-align: center;
-    border: 2px solid #000000; 
+    border: 3px solid #000000;
+    margin-bottom: 20px; 
 }
 
 .signup-box h2 {
-    font-size: 24px;
+    font-size: 48px;
     color: #000000;
-    margin-bottom: 20px; 
+    margin-bottom: 30px; 
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-left,
+.form-right {
+    width: 48%;
 }
 
 .signup-box label {
     display: block;
     text-align: left;
-    font-size: 14px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-left: 8px;
     color: #000000;
+    padding-top: 15px;
 }
 
 .signup-box input[type="text"],
-.signup-box input[type="email"],
+.signup-box input[type="number"],
 .signup-box input[type="password"],
 .signup-box select {
     width: 100%; 
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #000000; 
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 3px solid #000000;
     border-radius: 20px; 
-    font-size: 16px;
+    font-size: 20px;
     background-color: #e4e7ec; 
     box-sizing: border-box; 
 }
 
 .signup-box button {
-    width: 80%;
-    padding: 10px;
+    width: 50%;
+    padding: 15px;
     background-color: #f1f1e6; 
-    border: 2px solid #000000; 
+    border: 3px solid #000000;
     border-radius: 20px; 
-    font-size: 18px;
+    font-size: 24px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
@@ -81,8 +95,8 @@ body, html {
 }
 
 .signup-box p {
-    margin-top: 15px;
-    font-size: 12px;
+    margin-top: 20px;
+    font-size: 18px;
     color: #000000;
 }
 
@@ -90,4 +104,9 @@ body, html {
     color: #000000;
     text-decoration: none;
     font-weight: bold;
+}
+
+.signup-box p a:hover {
+    color:  #112dde;
+    text-decoration: none;
 }
