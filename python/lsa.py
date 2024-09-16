@@ -66,12 +66,16 @@ same_series = df[df["Series_Title"].str.contains(user_movie, case=False, na=Fals
 # Precision: measures how many of the top recommended items are relevant
 def precision_at_k(y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))  # Intersection of ground truth and predicted
+    if relevant == same_series.shape[0]: 
+        return relevant / same_series.shape[0]
     return relevant / k
 
 # Recall: measures how many relevant items are captured in the top recommendation
 def recall_at_k(y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))
-    return relevant / len(y_true)
+    if relevant == same_series.shape[0]: 
+        return relevant / same_series.shape[0]
+    return relevant / k
 
 # harmonic mean of precision and recall
 def f1_at_k(y_true, y_pred, k):
@@ -87,7 +91,7 @@ y_true = same_series["Series_Title"]
 # Predict movie    
 y_pred = [df.loc[i, "Series_Title"] for i, score in similar_movies]
 
-k = same_series.shape[0]
+k = 10
 precision = precision_at_k(y_true, y_pred, k)
 recall = recall_at_k(y_true, y_pred, k)
 f1 = f1_at_k(y_true, y_pred, k)
