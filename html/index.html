@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- font style -->
     <link href='https://fonts.googleapis.com/css?family=Limelight' rel='stylesheet'>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/common.css">
+
+    <!-- pyscript -->
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
     <title>Mobie</title>
 </head>
 
@@ -31,6 +37,17 @@
             </div>
         </div>
     </header>
+
+    <div id="default_Recommend">
+        {% for movie in movies_data %}
+            <div class="movie-item">
+                <!-- Display the image -->
+                <img src="{{ movie['Poster_Link'] }}" alt="{{ movie['Series_Title'] }}" width="200" height="300">
+                <!-- Display the title below the image -->
+                <h3>{{ movie['Series_Title'] }}</h3>
+            </div>
+        {% endfor %}
+    </div>
 
     <main>
         
