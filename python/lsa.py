@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 import numpy as np
+from timeit import default_timer as timer
 
 # Load Data
 df = pd.read_csv("C:/Users/Asus/Desktop/Python/dataset/movies.csv")
@@ -48,6 +49,8 @@ def find_similar_movies(target_vec, lsa):
 # Link the movies name here from drop down
 user_movie = input("Enter a movie name: ")
 
+start = timer()
+
 movie_index = df[df["Series_Title"] == user_movie].index[0]
 
 # Perform similarity search on the full dataset
@@ -58,6 +61,7 @@ similar_movies = find_similar_movies(target_vec, x_lsa)
 for i, score in similar_movies:
     print("{}: {}".format(i, df.loc[i, "Series_Title"]))
 
+end = timer()
 
 # ----------------------------------
 # check the efficiency and accuraccy
@@ -99,4 +103,5 @@ f1 = f1_at_k(y_true, y_pred, k)
 #print(f"Precision@{k}: {precision:.2f}") # AKA: Accurancy
 #print(f"Recall@{k}: {recall:.2f}")
 #print(f"F1@{k}: {f1:.2f}")
+#print(f"Executed Time: {end-start:.2f} seconds")
 #print("Predicted movies: ", y_pred)
