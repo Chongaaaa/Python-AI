@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from timeit import default_timer as timer
+import time
 
 # Load the dataset
 df = pd.read_csv("/dataset/movies.csv")
@@ -39,7 +39,7 @@ def recommendMovie(movie_title, cosine_sim):
 # Get user input
 user_movie = input("Enter a movie name: ")
 
-start = timer()
+start_time = time.time()
 
 
 # Display the recommended movies
@@ -48,7 +48,7 @@ print(f"Top 10 movies similar to '{user_movie}':")
 for movie in recommended_movies:
     print(movie)
 
-end = timer()
+end_time = time.time()
 
 # Evaluate performance
 same_series = df[df["Series_Title"].str.contains(user_movie, case=False, na=False)]
@@ -94,4 +94,4 @@ print(f"Accuracy@{k}: {accuracy:.2f}")
 print(f"Precision@{k}: {precision:.2f}") 
 print(f"Recall@{k}: {recall:.2f}")
 print(f"F1@{k}: {f1:.2f}")
-print(f"Executed Time: {end-start:.2f} seconds")
+print(f"Executed Time: {end_time-start_time:.2f} seconds")
