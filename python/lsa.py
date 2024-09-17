@@ -8,7 +8,7 @@ from timeit import default_timer as timer
 df = pd.read_csv("C:/Users/Asus/Desktop/Python/dataset/movies.csv")
 
 df = df.drop(columns = ["Unnamed: 0"])
-df["Movies_Infor"] = df["Released_Year"].astype(str) + " " + df["Genre"] + " " + df["Overview"] + " " + df["IMDB_Rating"].astype(str) + " " + df["Director"] + " " + df["Stars"]
+df["Movies_Infor"] = df["Genre"] + " " + df["Overview"] + " " + df["Director"] + " " + df["Stars"]
 
 x = df["Movies_Infor"]
 y = df["Series_Title"]
