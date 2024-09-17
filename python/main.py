@@ -27,15 +27,15 @@ def recommendMovieCosine(selected_movies):
     start = timer()
 
     # Find the index of the movie that matches the title
-    index = movies[movies['Series_Title'] == selected_movies].index[0]
+    index = movies[movies["Series_Title"] == selected_movies].index[0]
     distance = sorted(list(enumerate(cosine[index])), reverse=True, key=lambda vector: vector[1])
 
     end = timer()
     # Get the top 10 most similar movies
-    recommended_movies_name = [movies.iloc[i[0]]['Series_Title'] 
+    recommended_movies_name = [movies.iloc[i[0]]["Series_Title"] 
     for i in distance[0:10]]
 
-    recommended_movies_img = [movies.iloc[i[0]]['Poster_Link'] 
+    recommended_movies_img = [movies.iloc[i[0]]["Poster_Link"] 
     for i in distance[0:10]]
 
     time_executed = (end - start) * 1000
@@ -48,7 +48,7 @@ def recommendMovieKNN(selected_movies):
     # Start the timer
     start = timer()
 
-    index = movies[movies['Series_Title'] == selected_movies].index[0]
+    index = movies[movies["Series_Title"] == selected_movies].index[0]
     
     # Reduce the dimensionality of the input movie (same transformation as training)
     pca = PCA(n_components=1000)  # Use the number of components you want
@@ -56,7 +56,7 @@ def recommendMovieKNN(selected_movies):
     movie_reduced = pca.transform(knn_similarity[index].reshape(1, -1))
     
     # Perform the k-nearest neighbors search
-    knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20)
+    knn = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=20)
     knn.fit(similarity_reduced)
     distances, indices = knn.kneighbors(movie_reduced, n_neighbors=5)
     indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
@@ -91,7 +91,7 @@ def recommendMovieLSA(selected_movies):
     start = timer()
 
     # Find the index of the movie that matches the title
-    index = movies[movies['Series_Title'] == selected_movies].index[0]
+    index = movies[movies["Series_Title"] == selected_movies].index[0]
 
     # Perform similarity search on the full dataset
     target_vec = lsa[index]
@@ -100,27 +100,28 @@ def recommendMovieLSA(selected_movies):
     end = timer()
 
     # Get the top 10 most similar movies
-    recommended_movies_name = [movies.iloc[i[0]]['Series_Title'] 
+    recommended_movies_name = [movies.iloc[i[0]]["Series_Title"] 
     for i in similar_movies[0:10]]
 
-    recommended_movies_img = [movies.iloc[i[0]]['Poster_Link'] 
+    recommended_movies_img = [movies.iloc[i[0]]["Poster_Link"] 
     for i in similar_movies[0:10]]
 
     time_executed = (end - start) * 1000
     return recommended_movies_name, recommended_movies_img, time_executed
 
 #-----------------------------------------------------------------
+# Measure performance
 # Precision: measures how many of the top recommended items are relevant
 def precision_at_k(same_series, y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))  # Intersection of ground truth and predicted
-    if relevant == same_series.shape[0]: 
+    if (relevant == same_series.shape[0]) & (same_series.shape[0] != 0):  
         return relevant / same_series.shape[0]
     return relevant / k
 
 # Recall: measures how many relevant items are captured in the top recommendation
 def recall_at_k(same_series, y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))
-    if relevant == same_series.shape[0]: 
+    if (relevant == same_series.shape[0]) & (same_series.shape[0] != 0): 
         return relevant / same_series.shape[0]
     return relevant / k
 
@@ -196,6 +197,6 @@ if st.button("Show Recommend"):
     
     st.markdown("***")
     st.text(f"Time Executed: {time_executed:.2f} ms")
-    st.text(f"Precision: {precision:.2f} ms")
-    st.text(f"Recall: {recall:.2f} ms")
-    st.text(f"F1: {f1:.2f} ms")
+    st.text(f"Precision: {precision:.2f}")
+    st.text(f"Recall: {recall:.2f}")
+    st.text(f"F1: {f1:.2f}")
