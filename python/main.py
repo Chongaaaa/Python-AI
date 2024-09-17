@@ -4,9 +4,12 @@ import pandas as pd
 import pickle
 import requests
 from timeit import default_timer as timer
+from sklearn.decomposition import PCA
+from sklearn.neighbors import NearestNeighbors
 
 movies = pickle.load(open("../pickle/movies.pkl", "rb"))
 cosine = pickle.load(open("../pickle/cosine_sim.pkl", "rb"))
+knn_similarity = pickle.load(open("../pickle/knn.pkl", "rb"))
 lsa = pickle.load(open("../pickle/lsa.pkl", "rb"))
 
 # emoji icon link: https://www.webfx.com/tools/emoji-cheat-sheet/
@@ -40,20 +43,33 @@ def recommendMovieCosine(selected_movies):
 
 
 # KNN
-# def recommendMovieCosine(selected_movies):
+def recommendMovieKNN(selected_movies):
 
-#     # Find the index of the movie that matches the title
-#     index = movies[movies['Series_Title'] == selected_movies].index[0]
-#     distance = sorted(list(enumerate(cosine[index])), reverse=True, key=lambda vector: vector[1])
+    # Start the timer
+    start = timer()
 
-#     # Get the top 10 most similar movies
-#     recommended_movies_name = [movies.iloc[i[0]]['Series_Title'] 
-#     for i in distance[0:10]]
+    index = movies[movies['Series_Title'] == selected_movies].index[0]
+    
+    # Reduce the dimensionality of the input movie (same transformation as training)
+    pca = PCA(n_components=1000)  # Use the number of components you want
+    similarity_reduced = pca.fit_transform(knn_similarity)  # Apply PCA to reduce dimensionality
+    movie_reduced = pca.transform(knn_similarity[index].reshape(1, -1))
+    
+    # Perform the k-nearest neighbors search
+    knn = NearestNeighbors(metric='cosine', algorithm='brute', n_neighbors=20)
+    knn.fit(similarity_reduced)
+    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=5)
+    indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
 
-#     recommended_movies_img = [movies.iloc[i[0]]['Poster_Link'] 
-#     for i in distance[0:10]]
+    end = timer()
 
-#     return recommended_movies_name, recommended_movies_img
+    # Convert indices to integer for Pandas indexing
+    recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:k]
+
+    recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:k]
+
+    time_executed = (end - start) * 1000
+    return recommended_movies_name, recommended_movies_img, time_executed
 
 # LSA
 def euclidean_distance(vec1, vec2):
@@ -91,7 +107,7 @@ def recommendMovieLSA(selected_movies):
     for i in similar_movies[0:10]]
 
     time_executed = (end - start) * 1000
-    return recommended_movies_name, recommended_movies_img, time_executed, similar_movies
+    return recommended_movies_name, recommended_movies_img, time_executed
 
 #-----------------------------------------------------------------
 # Precision: measures how many of the top recommended items are relevant
@@ -137,9 +153,9 @@ if st.button("Show Recommend"):
     if(selected_alg == "Cosine Similarity"):
         movies_name, movies_img, time_executed = recommendMovieCosine(selected_movies)
     elif(selected_alg == "K Nearest Neighbour"):
-        movies_name, movies_img = recommendMovieKNN(selected_movies)
+        movies_name, movies_img, time_executed = recommendMovieKNN(selected_movies)
     else:
-        movies_name, movies_img, time_executed, similar_movies = recommendMovieLSA(selected_movies)
+        movies_name, movies_img, time_executed = recommendMovieLSA(selected_movies)
         
     precision, recall, f1 = chk_performance(selected_movies, movies_name)
         
