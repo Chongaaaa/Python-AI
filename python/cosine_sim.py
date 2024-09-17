@@ -20,6 +20,12 @@ vector = cv.fit_transform(df['Movie_Info'].values.astype('U')).toarray()
 # Calculate cosine similarity
 cosine_sim = cosine_similarity(vector)
 
+
+# Get user input
+user_movie = input("Enter a movie name: ")
+
+start_time = time.time()
+
 def recommendMovie(movie_title, cosine_sim):
     # Check if the movie exists in the DataFrame
     if movie_title not in df['Series_Title'].values:
@@ -35,12 +41,6 @@ def recommendMovie(movie_title, cosine_sim):
     for i in distance[0:10]]
 
     return recommended_movies
-
-# Get user input
-user_movie = input("Enter a movie name: ")
-
-start_time = time.time()
-
 
 # Display the recommended movies
 recommended_movies = recommendMovie(user_movie, cosine_sim)
