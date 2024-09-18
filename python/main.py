@@ -18,7 +18,7 @@ st.set_page_config(page_title="Mobie", page_icon=":movie_camera:", layout= "wide
 st.title("Welcome to MOBIE")
 
 st.header("Movie Recommender System")
-selected_alg = st.selectbox("Select algorithm", ("Cosine Similarity", "K Nearest Neighbours", "Latent Semantic Analysis"))
+selected_alg = st.selectbox("Select algorithm", ("Cosine Similarity", "K-Nearest Neighbours", "Latent Semantic Analysis"))
 
 selected_movies = st.selectbox("Select movies from dropdown", movies)
 
@@ -51,25 +51,31 @@ def recommendMovieKNN(selected_movies):
 
     index = movies[movies["Series_Title"] == selected_movies].index[0]
     
-    # Reduce the dimensionality of the input movie (same transformation as training)
-    pca = PCA(n_components=1000)  # Use the number of components you want
-    similarity_reduced = pca.fit_transform(knn_similarity)  # Apply PCA to reduce dimensionality
+    # Reduce the dimensionality of the input movie
+    pca = PCA(n_components=1000)  
+
+    # Apply PCA to reduce dimensionality
+    similarity_reduced = pca.fit_transform(knn_similarity)  
     movie_reduced = pca.transform(knn_similarity[index].reshape(1, -1))
     
     # Perform the k-nearest neighbors search
     knn = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=20)
     knn.fit(similarity_reduced)
-    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=5)
+
+    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=10)
     indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
 
+    #Stop the timer
     end = timer()
 
-    # Convert indices to integer for Pandas indexing
-    recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:k]
+    #Retrieve the titles and poster links of the top-k recommended movies
+    recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:10]
+    recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:10]
 
-    recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:k]
-
+    #Calculate the time taken for the execution
     time_executed = (end - start) * 1000
+
+    #Display the movie name, movie poster and time executed
     return recommended_movies_name, recommended_movies_img, time_executed
 
 # LSA
@@ -122,9 +128,9 @@ def precision_at_k(same_series, y_true, y_pred, k):
 # Recall: measures how many relevant items are captured in the top recommendation
 def recall_at_k(same_series, y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))
-    if (relevant == same_series.shape[0]) & (same_series.shape[0] != 0): 
-        return relevant / same_series.shape[0]
-    return relevant / k
+    if len(y_true) == 0: 
+        return 0
+    return relevant / len(y_true) 
 
 # harmonic mean of precision and recall
 def f1_at_k(prec, rec, y_true, y_pred, k):
@@ -151,15 +157,15 @@ def chk_performance(selected_movies, similar_movies):
 
 #---------------
 # Display result
-if st.button("Show Recommend"):
+if st.button("Show Recommendations"):
     if(selected_alg == "Cosine Similarity"):
         movies_name, movies_img, time_executed = recommendMovieCosine(selected_movies)
-    elif(selected_alg == "K Nearest Neighbour"):
+    elif(selected_alg == "K-Nearest Neighbours"):
         movies_name, movies_img, time_executed = recommendMovieKNN(selected_movies)
     else:
         movies_name, movies_img, time_executed = recommendMovieLSA(selected_movies)
         
-    precision, recall, f1 = chk_performance(selected_movies, movies_name)
+    #precision, recall, f1 = chk_performance(selected_movies, movies_name)
         
     st.markdown("#")
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -198,6 +204,6 @@ if st.button("Show Recommend"):
     
     st.markdown("***")
     st.text(f"Time Executed: {time_executed:.2f} ms")
-    st.text(f"Precision: {precision:.2f}")
-    st.text(f"Recall: {recall:.2f}")
-    st.text(f"F1: {f1:.2f}")
+    # st.text(f"Precision: {precision:.2f}")
+    # st.text(f"Recall: {recall:.2f}")
+    # st.text(f"F1: {f1:.2f}")
