@@ -28,6 +28,7 @@ def recommendMovieCosine(selected_movies):
 
     # Find the index of the movie that matches the title
     index = movies[movies["Series_Title"] == selected_movies].index[0]
+    # Sort movies by similarity score (distance) in descending order(get high similarity score)
     distance = sorted(list(enumerate(cosine[index])), reverse=True, key=lambda vector: vector[1])
 
     end = timer()
