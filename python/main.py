@@ -18,7 +18,7 @@ st.set_page_config(page_title="Mobie", page_icon=":movie_camera:", layout= "wide
 st.title("Welcome to MOBIE")
 
 st.header("Movie Recommender System")
-selected_alg = st.selectbox("Select algorithm", ("Cosine Similarity", "K Nearest Neighbours", "Latent Semantic Analysis"))
+selected_alg = st.selectbox("Select algorithm", ("Cosine Similarity", "K-Nearest Neighbours", "Latent Semantic Analysis"))
 
 selected_movies = st.selectbox("Select movies from dropdown", movies)
 
