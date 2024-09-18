@@ -51,25 +51,31 @@ def recommendMovieKNN(selected_movies):
 
     index = movies[movies["Series_Title"] == selected_movies].index[0]
     
-    # Reduce the dimensionality of the input movie (same transformation as training)
-    pca = PCA(n_components=1000)  # Use the number of components you want
-    similarity_reduced = pca.fit_transform(knn_similarity)  # Apply PCA to reduce dimensionality
+    # Reduce the dimensionality of the input movie
+    pca = PCA(n_components=1000)  
+
+    # Apply PCA to reduce dimensionality
+    similarity_reduced = pca.fit_transform(knn_similarity)  
     movie_reduced = pca.transform(knn_similarity[index].reshape(1, -1))
     
     # Perform the k-nearest neighbors search
     knn = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=20)
     knn.fit(similarity_reduced)
+
     distances, indices = knn.kneighbors(movie_reduced, n_neighbors=10)
     indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
 
+    #Stop the timer
     end = timer()
 
-    # Convert indices to integer for Pandas indexing
+    #Retrieve the titles and poster links of the top-k recommended movies
     recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:k]
-
     recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:k]
 
+    #Calculate the time taken for the execution
     time_executed = (end - start) * 1000
+
+    #Display the movie name, movie poster and time executed
     return recommended_movies_name, recommended_movies_img, time_executed
 
 # LSA
@@ -151,10 +157,10 @@ def chk_performance(selected_movies, similar_movies):
 
 #---------------
 # Display result
-if st.button("Show Recommend"):
+if st.button("Show Recommendations"):
     if(selected_alg == "Cosine Similarity"):
         movies_name, movies_img, time_executed = recommendMovieCosine(selected_movies)
-    elif(selected_alg == "K Nearest Neighbour"):
+    elif(selected_alg == "K-Nearest Neighbours"):
         movies_name, movies_img, time_executed = recommendMovieKNN(selected_movies)
     else:
         movies_name, movies_img, time_executed = recommendMovieLSA(selected_movies)
