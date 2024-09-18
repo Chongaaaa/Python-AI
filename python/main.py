@@ -62,7 +62,7 @@ def recommendMovieKNN(selected_movies):
     knn = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=20)
     knn.fit(similarity_reduced)
 
-    indices = knn.kneighbors(movie_reduced, n_neighbors=10)
+    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=10)
     indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
 
     #Stop the timer
