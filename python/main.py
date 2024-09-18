@@ -121,9 +121,9 @@ def precision_at_k(same_series, y_true, y_pred, k):
 # Recall: measures how many relevant items are captured in the top recommendation
 def recall_at_k(same_series, y_true, y_pred, k):
     relevant = len(set(y_true) & set(y_pred[:k]))
-    if (relevant == same_series.shape[0]) & (same_series.shape[0] != 0): 
-        return relevant / same_series.shape[0]
-    return relevant / k
+    if len(y_true) == 0: 
+        return 0
+    return relevant / len(y_true) 
 
 # harmonic mean of precision and recall
 def f1_at_k(prec, rec, y_true, y_pred, k):
