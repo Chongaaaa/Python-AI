@@ -58,7 +58,7 @@ def recommendMovieKNN(selected_movies):
     # Perform the k-nearest neighbors search
     knn = NearestNeighbors(metric="cosine", algorithm="brute", n_neighbors=20)
     knn.fit(similarity_reduced)
-    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=5)
+    distances, indices = knn.kneighbors(movie_reduced, n_neighbors=10)
     indices = indices.flatten()  # Flatten the indices to use for Pandas indexing
 
     end = timer()
@@ -158,7 +158,7 @@ if st.button("Show Recommend"):
     else:
         movies_name, movies_img, time_executed = recommendMovieLSA(selected_movies)
         
-    precision, recall, f1 = chk_performance(selected_movies, movies_name)
+    #precision, recall, f1 = chk_performance(selected_movies, movies_name)
         
     st.markdown("#")
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -197,6 +197,6 @@ if st.button("Show Recommend"):
     
     st.markdown("***")
     st.text(f"Time Executed: {time_executed:.2f} ms")
-    st.text(f"Precision: {precision:.2f}")
-    st.text(f"Recall: {recall:.2f}")
-    st.text(f"F1: {f1:.2f}")
+    # st.text(f"Precision: {precision:.2f}")
+    # st.text(f"Recall: {recall:.2f}")
+    # st.text(f"F1: {f1:.2f}")
