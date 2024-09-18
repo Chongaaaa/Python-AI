@@ -69,8 +69,8 @@ def recommendMovieKNN(selected_movies):
     end = timer()
 
     #Retrieve the titles and poster links of the top-k recommended movies
-    recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:k]
-    recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:k]
+    recommended_movies_name = movies.iloc[indices]["Series_Title"].values[:10]
+    recommended_movies_img = movies.iloc[indices]["Poster_Link"].values[:10]
 
     #Calculate the time taken for the execution
     time_executed = (end - start) * 1000
